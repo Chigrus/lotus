@@ -44,6 +44,8 @@
 	let og_data = data.og_data[0];
 	let user = data.user;
 
+	let actions = ['b', 'i', 'u', 'strike', 'undo', 'redo', 'viewHtml', ];
+
 	let edit_field:{popup: boolean; info: InfoEditBlock} = {
 		popup: false,
 		info: {
@@ -60,6 +62,10 @@
 	import BtnAdminEdit from '../../../components/BtnAdminEdit.svelte';
 	import OpenGraphEditor from '../../../components/OpenGraphEditor.svelte';
 	import BtnEditBlock from '../../../components/BtnEditBlock.svelte';
+	import Button from '../../../components/Button.svelte';
+
+	import Editor from 'cl-editor';
+	
 
 	let isEdited = false;
 	let isAddNode = false;
@@ -138,6 +144,11 @@
 		isOpenGraphEdit = true;
 	}
 
+	function editHtml(e){
+		//console.log(e.detail);
+		post[edit_field.info.field] = e.detail;
+	}
+
 </script>
 
 <svelte:head>
@@ -169,8 +180,14 @@
 		{edit_field.info.title}
 	</slot>
 	<slot slot="content">
-		{post[edit_field.info.field]} 
+		{#if edit_field.info.field === 'title'}
+			<Editor actions={actions} html={post['title']} on:change="{(e) => editHtml(e)}" />
+		{/if}
+		{#if edit_field.info.field === 'text'}
+			<Editor actions={actions} html={post['text']} on:change="{(e) => editHtml(e)}" />
+		{/if}
 	</slot>
+	<slot slot="bottom"><Button title="Сохранить" /></slot>
 </Popup>
 
 {#if isOpenGraphEdit}
@@ -195,14 +212,14 @@
 		<article class="post">
 			<div class="data">Апрель 07, 2023</div>
 			<div class="title">
-				{post.title}
+				{@html post.title}
 				<BtnEditBlock 
 					on:getData={(event) => { edit_field = event.detail; }}
 					info={{field: 'title', type: 'input', title: 'Редактирования названия поста:'}}
 				/>
 			</div>
 			<div class="text">
-				{post.text}
+				{@html post.text}
 				<BtnEditBlock 
 					on:getData={(event) => { edit_field = event.detail; }}
 					info={{field: 'text', type: 'input', title: 'Редактирования краткой записи:'}}

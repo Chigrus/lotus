@@ -41,7 +41,8 @@
 
 .popup{
     width: max-content;
-    max-width: calc(100% - 40px);
+    max-width: 640px;
+    min-width: 480px;
     height: max-content;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
@@ -86,7 +87,13 @@
 }
 
 .bottom{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    padding-top: 0;
 }
 
 @media only screen and (max-width: 639px){

@@ -14,7 +14,7 @@
     const dispatch = createEventDispatcher();
 
     function clickEdit() {
-        console.log(info);
+        //console.log(info);
         dispatch('getData', {
             popup: true,
             info: info,
