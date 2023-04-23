@@ -157,7 +157,7 @@
 
 <Popup bind:isOpen={isAddNode}>
 	<slot slot="title">
-		Добавить новый блок
+		Добавить новый блок1
 	</slot>
 	<slot slot="content">
 		<TagsInsert on:onSelectNode={(event) => addNode(event.detail.typeNode, event.detail.contentInner)} />
