@@ -1,0 +1,20 @@
+/* Variables and mixins declared here will be available in all other SCSS files */
+:root {
+	/********************* Fonts *****************************/
+    --font-body: Rubik, Arial, 'Helvetica Neue', sans-serif;
+
+	/********************* Text *****************************/
+	--text-primary: #000;
+	--text-secondary: #fff;
+	--text-third: #363636;
+
+	/********************* Background *****************************/
+	--bg-primary: #fff;
+	--bg-secondary: #000;
+	--bg-third: #e5e5e5;
+	--bg-4: #f4f4f4;
+
+	/********************* Outline *****************************/
+	--outline-primary: #000;
+	--outline-secondary: #e5e5e5;
+}
