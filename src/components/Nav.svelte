@@ -1,20 +1,11 @@
 <script>
-    export let menu;
-
-    import { page } from '$app/stores';
-
-    function menuClick(id){
-        menu.forEach(function(item, i) { 
-            item.active = false; 
-        });
-        menu[id-1].active = true;
-    }
+    import {menu} from '../lib/menu';
 </script>
 
 <ul class="mainmenu">
-    {#each menu as item}
-        <li class="item {$page.url.pathname === '/'+item.url || ($page.url.pathname === '/' && item.active) ? 'active' : ''}">
-            <a class="link" href="/{item.url}" on:click={() => menuClick(item.position, item.url)}>{item.title}</a>
+    {#each $menu as item (item.id)}
+        <li class="item {item.active ? 'active' : ''}">
+            <a class="link" href="/{item.url}">{item.title}</a>
         </li>
     {/each}
 </ul>

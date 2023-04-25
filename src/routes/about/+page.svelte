@@ -27,6 +27,7 @@
 	export let data:{
 		og_data: OG[];
 		post: {
+			id: number;
 			post: Post[];
 		}[];
 		user: User;
@@ -102,12 +103,12 @@
 
 	async function savePostFn(){
 
-		const response = await fetch('api/add', {
+		const response = await fetch('api/updatepost', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
 			},
-			body: JSON.stringify({ textPost }),
+			body: JSON.stringify({ post: textPost, id: post.id }),
 		});
 
 		let total = await response.json();

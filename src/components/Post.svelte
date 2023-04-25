@@ -4,8 +4,8 @@
 
 <article class="post">
     <div class="data">Апрель 07, 2023</div>
-    <div class="title">{post.title}</div>
-    <div class="text">{post.text}</div>
+    <div class="title">{@html post.title}</div>
+    <div class="text">{@html post.text}</div>
     <div class="line">
         <a href="/blog/{post.slug}" class="link">Читать далее</a>
     </div>

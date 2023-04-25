@@ -1,11 +1,12 @@
 <script>
-  import "../app.scss";
-  export let data;
+	export let data;
 
-  import Nav from "../components/Nav.svelte";
-  import "./styles.css";
+	import "../app.scss";
+	import Nav from "../components/Nav.svelte";
+	import "./styles.css";
+	import {menuData} from '../lib/menu';
 
-  let menu = data.menu;
+	$: $menuData = data.menu;
 
 </script>
 
@@ -16,7 +17,7 @@
       <div class="header">
         <div href="/" class="logo"></div>
         <nav class="menu">
-          <Nav bind:menu />
+          <Nav />
         </nav>
       </div>
     </div>

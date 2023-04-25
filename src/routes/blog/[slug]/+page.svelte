@@ -1,41 +1,8 @@
 <script lang='ts'>
-	type Article = {
-		id: number;
-		type: string;
-		content: string;
-	}
-	type User = {
-		isAdmin: boolean;
-		isEditor: boolean;
-	}
-	type OG = {
-		title: string;
-		description: string;
-		og_type: string;
-		og_title: string;
-		og_description: string;
-		og_url: string;
-		og_image: string;
-		og_image_type: string;
-		og_image_width: string;
-		og_image_height: string;
-		og_article: Object;
-		og_profile: Object;
-		og_video: Object;
-	}
-	type InfoEditBlock = {
-		field: string;
-		type: string;
-		title: string;
-	}
+	import type {Post, EditField, OG, User} from './types'
 
 	export let data:{
-		post: {
-			[key: string]: any;
-			title: string;
-			text: string;
-			post: Article[];
-		}[];
+		post: Post[];
 		og_data: OG[];
 		user: User;
 	};
@@ -46,9 +13,10 @@
 
 	let actions = ['b', 'i', 'u', 'strike', 'undo', 'redo', 'viewHtml', ];
 
-	let edit_field:{popup: boolean; info: InfoEditBlock} = {
+	let edit_field:EditField = {
 		popup: false,
 		info: {
+			id: 0,
 			field: '',
 			type: '',
 			title: '',
@@ -126,12 +94,12 @@
 
 	async function savePostFn(){
 
-		const response = await fetch('/api/add', {
+		const response = await fetch('/api/updatepost', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
 			},
-			body: JSON.stringify({ textPost }),
+			body: JSON.stringify({ post: textPost, id: post.id }),
 		});
 
 		let total = await response.json();
@@ -144,9 +112,25 @@
 		isOpenGraphEdit = true;
 	}
 
-	function editHtml(e){
+	function editHtml(e:CustomEvent){
 		//console.log(e.detail);
 		post[edit_field.info.field] = e.detail;
+	}
+
+	async function saveBlock(dataField:EditField){
+		//console.log(dataField);
+		//console.log(post[dataField.info.field]);
+		const response = await fetch('/api/update', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({ id: dataField.info.id, field: dataField.info.field, value: post[dataField.info.field]  }),
+		});
+
+		let total = await response.json();
+
+		console.log(total);
 	}
 
 </script>
@@ -186,8 +170,12 @@
 		{#if edit_field.info.field === 'text'}
 			<Editor actions={actions} html={post['text']} on:change="{(e) => editHtml(e)}" />
 		{/if}
+		<!-- @ts-ignore -->
+		<!-- <Editor actions={actions} html={post[edit_field.info.field]} on:change="{(e) => editHtml(e)}" /> -->
 	</slot>
-	<slot slot="bottom"><Button title="Сохранить" /></slot>
+	<slot slot="bottom">
+		<Button title="Сохранить" on:click="{() => saveBlock(edit_field)}" />
+	</slot>
 </Popup>
 
 {#if isOpenGraphEdit}
@@ -202,29 +190,29 @@
 
 <div class="wrap">
 	<div class="work">
-		{#if user.isAdmin}
-		<div class="btns">
-			<button class="btn edit" on:click={editPost}>Редактор</button>
-			<button class="btn preview" on:click={previewPost}>Просмотр</button>
-			<button class="btn save" on:click={savePostFn}>Сохранить</button>
-		</div>
-		{/if}
 		<article class="post">
 			<div class="data">Апрель 07, 2023</div>
 			<div class="title">
 				{@html post.title}
 				<BtnEditBlock 
 					on:getData={(event) => { edit_field = event.detail; }}
-					info={{field: 'title', type: 'input', title: 'Редактирования названия поста:'}}
+					info={{id: post.id, field: 'title', type: 'input', title: 'Редактирования названия поста:'}}
 				/>
 			</div>
 			<div class="text">
 				{@html post.text}
 				<BtnEditBlock 
 					on:getData={(event) => { edit_field = event.detail; }}
-					info={{field: 'text', type: 'input', title: 'Редактирования краткой записи:'}}
+					info={{id: post.id, field: 'text', type: 'input', title: 'Редактирования краткой записи:'}}
 				/>
 			</div>
+			{#if user.isAdmin}
+			<div class="btns">
+				<button class="btn edit" on:click={editPost}>Редактор</button>
+				<button class="btn preview" on:click={previewPost}>Просмотр</button>
+				<button class="btn save" on:click={savePostFn}>Сохранить</button>
+			</div>
+			{/if}
 			{#each post.post as single_post}
 			<PostTag 
 				post={single_post} 

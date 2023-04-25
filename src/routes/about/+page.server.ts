@@ -2,8 +2,8 @@ import type { Action } from '@sveltejs/kit';
 import * as db from '$lib/server/db';
 import * as token from '$lib/server/token';
 
-let og_id = 55;
-let post_id = 14;
+let og_id = 2;
+let post_id = 15;
  
 export const load:Action= async ({ locals, cookies }) => {
   return {

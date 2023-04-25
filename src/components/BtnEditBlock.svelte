@@ -1,5 +1,6 @@
 <script lang='ts'>
 	type Info = {
+        id: number;
 		field: string;
 		type: string;
 		title: string;
