@@ -159,9 +159,17 @@
 		if(count > 0){
 			console.log('Запись с таким url: '+url+' уже существует!');
 		}else{
-			console.log('Можно писать здесь');
-			goto('/blog/');
-			//goto('/blog/Honda-Civic-IX');
+			const response = await fetch('/api/updateslug', {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify({ slug: url, id: post.id }),
+			});
+			//let total = await response.json();
+			goto('/blog/'+url);
+			edit_url.popup = false;
+			post.slug = url;
 		}
 	}
 

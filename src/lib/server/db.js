@@ -74,12 +74,24 @@ export async function getSinglePost(locals, slug){
 
 /***************************************** Получаем Посты  ******************************************/
 
-export async function getPosts(locals, cat_id){
+export async function getPosts(locals, cat_id, user){
     const { dbconn } = locals;
 
-    const result = await dbconn.query(`SELECT * 
-                                       FROM public.posts 
-                                       WHERE category = $1`, [cat_id]);
+    let text;
+
+    if(user.isAdmin){
+        text = `SELECT * 
+                FROM public.posts 
+                WHERE category = $1`;
+    }else{
+        text = `SELECT * 
+                FROM public.posts 
+                WHERE category = $1 AND publication = true`;
+    }
+
+    const values = [cat_id];    
+                          
+    const result = await dbconn.query(text, values); 
 
     return result.rows;
 }
