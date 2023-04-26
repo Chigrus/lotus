@@ -8,8 +8,8 @@
 
     import { createEventDispatcher } from 'svelte';
 
-    export let top = '-5px';
-    export let right = '-40px';
+    export let top = '0';
+    export let right = '0';
     export let info:Info;
 
     const dispatch = createEventDispatcher();

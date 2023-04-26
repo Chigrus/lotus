@@ -185,34 +185,56 @@
 </div>
 
 <style lang="scss">
-	.btns{
-		width: 100%;
-		margin: 20px 0;
-		display: flex;
-		justify-content: flex-end;
-	}
+.btns{
+	width: 100%;
+	margin: 20px 0;
+	display: flex;
+	justify-content: flex-end;
+}
 
-	.btn{
-		padding: 5px 10px;
-		background-color: green;
-		color: #fff;
-		margin-left: 10px;
-		cursor: pointer;
-		font-size: 12px;
+.btn{
+	padding: 7px 14px;
+	background-color: #000;
+	border: none;
+	outline: none;
+	color: #fff;
+	margin-left: 10px;
+	cursor: pointer;
+	font-size: 12px;
+	&:hover{
+		background-color: rgba(0,0,0,0.75);
 	}
+}
 
-	.btn:first-child{
-		margin-left: 0;
-	}
+.btn:first-child{
+	margin-left: 0;
+}
 
-	.wrap_about{
-		.work{
-			max-width: 700px;
-		}
+.wrap_about{
+	.work{
+		max-width: 700px;
 	}
+}
 
-	.post{
-		width: 100%;
-		margin: 60px 0;
-	}
+.post{
+	width: 100%;
+	margin: 40px 0;
+}
+
+:global(p) {
+  font-size: 16px;
+  line-height: 1.7em;
+}
+
+:global(h1) {
+  font-size: 24px;
+}
+
+:global(h2) {
+  font-size: 20px;
+}
+
+:global(h3) {
+  font-size: 18px;
+}
 </style>

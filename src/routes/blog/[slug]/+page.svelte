@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import type {Post, EditField, OG, User} from './types'
+	import type {Post, EditField, OG, User, EditUrl} from './types'
 
 	export let data:{
 		post: Post[];
@@ -21,6 +21,11 @@
 			type: '',
 			title: '',
 		},
+	};
+
+	let edit_url:EditUrl = {
+		popup: false,
+		url: '',
 	};
 
 	import PostTag from '../../../components/PostTag.svelte';
@@ -133,6 +138,15 @@
 		console.log(total);
 	}
 
+	function urlEdit(url:string){
+		edit_url.popup = true;
+		edit_url.url = url;
+	}
+
+	function saveUrl(url:string){
+		console.log(url);
+	}
+
 </script>
 
 <svelte:head>
@@ -156,6 +170,18 @@
 	</slot>
 	<slot slot="content">
 		<TagsInsert on:onSelectNode={(event) => addNode(event.detail.typeNode, event.detail.contentInner)} />
+	</slot>
+</Popup>
+
+<Popup bind:isOpen={edit_url.popup}>
+	<slot slot="title">
+		Редактировать url поста
+	</slot>
+	<slot slot="content">
+		<input class="editUrl" type="text" bind:value={edit_url.url} />
+	</slot>
+	<slot slot="bottom">
+		<Button title="Сохранить" on:click="{() => saveUrl(edit_url.url)}" />
 	</slot>
 </Popup>
 
@@ -184,7 +210,8 @@
 
 {#if user.isAdmin}
 <AdminButtons>
-	<BtnAdminEdit title="" bg="opengraph" on:click="{openGraphEdit}" />
+	<BtnAdminEdit title="OpenGraph" bg="opengraph" on:click="{openGraphEdit}" />
+	<BtnAdminEdit title="URL" bg="url" on:click="{() => urlEdit(post.slug)}" />
 </AdminButtons>
 {/if}
 
@@ -228,6 +255,27 @@
 </div>
 
 <style lang="scss">
+.btns{
+	width: 100%;
+	margin: 20px 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn{
+	padding: 7px 14px;
+	background-color: #000;
+	border: none;
+	outline: none;
+	color: #fff;
+	margin-left: 10px;
+	cursor: pointer;
+	font-size: 12px;
+	&:hover{
+		background-color: rgba(0,0,0,0.75);
+	}
+}
+
 .post{
 	position: relative;
 	width: 100%;
@@ -261,12 +309,28 @@
     margin-top: 30px;
 }
 
+.editUrl{
+	width: 100%;
+	box-sizing: border-box;
+	outline: none;
+	border: 1px solid #000;
+	padding: 7px 10px;
+}
+
 :global(p) {
   font-size: 16px;
   line-height: 1.7em;
 }
 
-:global(h3) {
+:global(h1) {
   font-size: 24px;
+}
+
+:global(h2) {
+  font-size: 20px;
+}
+
+:global(h3) {
+  font-size: 18px;
 }
 </style>

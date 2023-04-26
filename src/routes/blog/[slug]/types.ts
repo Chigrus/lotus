@@ -30,6 +30,7 @@ export type InfoEditBlock = {
 }
 export type Post = {
     id: number;
+    slug: string;
     title: string;
     text: string;
     post: Article[];
@@ -39,4 +40,9 @@ export type Post = {
 export type EditField = {
     popup: boolean; 
     info: InfoEditBlock;
+}
+
+export type EditUrl = {
+    popup: boolean; 
+    url: string;
 }

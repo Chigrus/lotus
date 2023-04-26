@@ -3,7 +3,7 @@
     export let bg = '';
 </script>
 
-<button class="btn {bg}" on:click>{title}</button>
+<button class="btn {bg}" {title} on:click></button>
 
 <style lang="scss">
 .btn{
@@ -27,5 +27,10 @@
 
 .btn.opengraph{
     background-image: url(/svg/openGraph.svg);
+}
+
+.btn.url{
+    background-image: url(/svg/link.svg);
+    background-size: 60% 60%;
 }
 </style>
