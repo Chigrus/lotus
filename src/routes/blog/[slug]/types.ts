@@ -33,6 +33,7 @@ export type Post = {
     slug: string;
     title: string;
     text: string;
+    publication: boolean;
     post: Article[];
     [key: string]: any;
 }

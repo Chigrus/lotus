@@ -37,10 +37,9 @@
 	import OpenGraphEditor from '../../../components/OpenGraphEditor.svelte';
 	import BtnEditBlock from '../../../components/BtnEditBlock.svelte';
 	import Button from '../../../components/Button.svelte';
+	import Switch from '../../../components/Switch.svelte';
 
 	import Editor from 'cl-editor';
-    import { page } from '$app/stores';
-	
 
 	let isEdited = false;
 	let isAddNode = false;
@@ -243,7 +242,9 @@
 
 <div class="wrap">
 	<div class="work">
+		{#if post.publication || user.isAdmin}
 		<article class="post">
+			{#if user.isAdmin}<div class="publication"><Switch status={post.publication} /></div>{/if}
 			<div class="data">Апрель 07, 2023</div>
 			<div class="title">
 				{@html post.title}
@@ -277,6 +278,7 @@
 			/>
 			{/each}
 		</article>
+		{/if}
 	</div>
 </div>
 
