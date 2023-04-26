@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import type {Post, EditField, OG, User, EditUrl} from './types'
+	import { goto } from '$app/navigation';
 
 	export let data:{
 		post: Post[];
@@ -38,6 +39,7 @@
 	import Button from '../../../components/Button.svelte';
 
 	import Editor from 'cl-editor';
+    import { page } from '$app/stores';
 	
 
 	let isEdited = false;
@@ -143,8 +145,24 @@
 		edit_url.url = url;
 	}
 
-	function saveUrl(url:string){
-		console.log(url);
+	async function saveUrl(url:string){
+		const response = await fetch('/api/getcount', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({ slug: url }),
+		});
+
+		let count:number = await response.json();
+
+		if(count > 0){
+			console.log('Запись с таким url: '+url+' уже существует!');
+		}else{
+			console.log('Можно писать здесь');
+			goto('/blog/');
+			//goto('/blog/Honda-Civic-IX');
+		}
 	}
 
 </script>
