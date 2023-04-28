@@ -172,6 +172,23 @@
 		}
 	}
 
+	async function changeStatus(){
+
+		post.publication = !post.publication;
+
+		const response = await fetch('/api/update', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({ id: post.id, field: 'publication', value: post.publication  }),
+		});
+
+		let res = await response.json();
+
+		console.log(res);
+	}
+
 </script>
 
 <svelte:head>
@@ -244,21 +261,21 @@
 	<div class="work">
 		{#if post.publication || user.isAdmin}
 		<article class="post">
-			{#if user.isAdmin}<div class="publication"><Switch status={post.publication} /></div>{/if}
+			{#if user.isAdmin}<div class="publication"><Switch status={post.publication} on:click={changeStatus} /></div>{/if}
 			<div class="data">Апрель 07, 2023</div>
 			<div class="title">
 				{@html post.title}
-				<BtnEditBlock 
+				{#if user.isAdmin}<BtnEditBlock 
 					on:getData={(event) => { edit_field = event.detail; }}
 					info={{id: post.id, field: 'title', type: 'input', title: 'Редактирования названия поста:'}}
-				/>
+				/>{/if}
 			</div>
 			<div class="text">
 				{@html post.text}
-				<BtnEditBlock 
+				{#if user.isAdmin}<BtnEditBlock 
 					on:getData={(event) => { edit_field = event.detail; }}
 					info={{id: post.id, field: 'text', type: 'input', title: 'Редактирования краткой записи:'}}
-				/>
+				/>{/if}
 			</div>
 			{#if user.isAdmin}
 			<div class="btns">

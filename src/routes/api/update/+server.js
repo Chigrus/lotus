@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 
-const VALID_FIELDS = ['title', 'text'];
+const VALID_FIELDS = ['title', 'text', 'publication'];
  
 export async function POST({ request, locals }) {
   const { id, field, value } = await request.json();

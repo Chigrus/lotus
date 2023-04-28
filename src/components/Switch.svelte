@@ -2,10 +2,10 @@
     export let status:boolean;
 </script>
 
-<div class="switch" class:no={!status}>
+<button class="switch" class:no={!status} on:click>
     {#if status}<span>Опубликовано</span>{/if}
     {#if !status}<span>Не опубликовано</span>{/if}
-</div>
+</button>
 
 <style lang="scss">
 .switch{
@@ -21,6 +21,9 @@
     font-size: 12px;
     box-sizing: border-box;
     padding: 0 10px;
+    border: none;
+    outline: none;
+    user-select: none;
     cursor: pointer;
     &::before{
         content: '';
