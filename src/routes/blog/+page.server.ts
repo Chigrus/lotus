@@ -7,11 +7,14 @@ type User = {
   isEditor: boolean;
 }
 
-let cat_id = 1;
+let cat_id:number = 1;
+let og_id:number = 4;
  
 export const load:Action= async ({ locals, cookies }) => {
   let user:User = await token.getUser(cookies);
   return {
+    og_data: await db.getOG(locals, og_id),
     posts: await db.getPosts(locals, cat_id, user),
+    user: await token.getUser(cookies),
   };
 }
