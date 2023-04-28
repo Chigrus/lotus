@@ -1,12 +1,17 @@
-<script>
+<script lang='ts'>
 	export let data;
 
 	import "../app.scss";
 	import Nav from "../components/Nav.svelte";
 	import "./styles.css";
 	import {menuData} from '../lib/menu';
+	import { goto } from '$app/navigation';
 
 	$: $menuData = data.menu;
+
+	function goToHome(){
+		goto('/');
+	}
 
 </script>
 
@@ -15,7 +20,7 @@
   <div class="wrap wrap__header">
     <div class="work">
       <div class="header">
-        <div href="/" class="logo"></div>
+        <button class="logo" on:click={goToHome} ></button>
         <nav class="menu">
           <Nav />
         </nav>
@@ -52,13 +57,18 @@
 	justify-content: center;
 	width: 50px;
 	height: 50px;
+	font-size: 23px;
+	text-transform: uppercase;
+	font-weight: 600;
+	border: none;
+	outline: none;
+	user-select: none;
+	background-color: transparent;
 	background-image: url(/svg/logo.svg);
 	background-repeat: no-repeat;
 	background-position: left center;
 	background-size: 50px 50px;
-	font-size: 23px;
-	text-transform: uppercase;
-	font-weight: 600;
+	cursor: pointer;
 }
 
 .menu{
