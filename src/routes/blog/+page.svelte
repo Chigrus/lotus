@@ -21,6 +21,67 @@
 	function openGraphEdit(){
 		isOpenGraphEdit = true;
 	}
+
+	async function addPost(){
+		const res_is_slug = await fetch('/api/getcount', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({ slug: 'new_post' }),
+		});
+
+		let count:number = await res_is_slug.json();
+
+		if(count > 0){
+			console.log('Запись с таким url: new_post уже существует!');
+			return;
+		}else{
+			const response = await fetch('/api/addog', {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify({
+										title: 'Новый пост', 
+										description: 'Описание нового поста', 
+										og_type: 'article', 
+										og_title: '',
+										og_description: '',
+										og_url: '',
+										og_image: '',
+										og_image_type: 'image/jpeg',
+										og_image_width: 1200,
+										og_image_height: 630,
+										og_article: {},
+										og_profile: {},
+										og_video: {},
+									}),
+			});
+
+			let og_id = await response.json();
+
+			const response_add = await fetch('/api/addpost', {
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json'
+				},
+				body: JSON.stringify({
+										category: 1, 
+										title: 'Новый пост', 
+										text: 'Описание нового поста', 
+										icon: '', 
+										post: [{"id":1,"type":"h1","content":"Заголовок нового поста"}], 
+										slug: 'new_post', 
+										og_id: og_id
+									}),
+			});
+
+			let resadd = await response_add.json();
+
+			posts = [...posts, resadd];
+		}
+	}
 </script>
 
 <svelte:head>
@@ -41,6 +102,7 @@
 {#if user.isAdmin}
 <AdminButtons>
 	<BtnAdminEdit title="OpenGraph" bg="opengraph" on:click="{openGraphEdit}" />
+	<BtnAdminEdit title="Добавить пост" bg="addpost" on:click="{addPost}" />
 </AdminButtons>
 {/if}
 

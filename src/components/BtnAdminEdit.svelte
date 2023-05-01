@@ -33,4 +33,9 @@
     background-image: url(/svg/link.svg);
     background-size: 60% 60%;
 }
+
+.btn.addpost{
+    background-image: url(/svg/addpost.svg);
+    background-size: 60% 60%;
+}
 </style>
