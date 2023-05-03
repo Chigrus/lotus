@@ -294,6 +294,13 @@
 				on:delPostNode={(event) => delPost(event.detail.idPost)}
 			/>
 			{/each}
+			<div class="share">
+				<div class="share-title">Поделиться:</div>
+				<div class="ya-share2" 
+					data-curtain data-color-scheme="whiteblack" 
+					data-services="vkontakte,odnoklassniki,telegram,viber,whatsapp,skype">
+				</div>
+			</div>
 		</article>
 		{/if}
 	</div>
@@ -360,6 +367,18 @@
 	outline: none;
 	border: 1px solid #000;
 	padding: 7px 10px;
+}
+
+.share{
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+.share-title{
+	font-weight: 600;
+	margin-right: 5px;
 }
 
 :global(p) {

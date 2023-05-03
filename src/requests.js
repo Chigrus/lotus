@@ -1,5 +1,5 @@
 export const uploadImage = async (contentType, blob) => {
-    const response = await fetch('api/uploader', {
+    const response = await fetch('/api/uploader', {
         method: 'PUT',
         headers: {
             'Content-Type': contentType
