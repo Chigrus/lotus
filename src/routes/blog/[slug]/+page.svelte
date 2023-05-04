@@ -3,12 +3,12 @@
 	import { goto } from '$app/navigation';
 
 	export let data:{
-		post: Post[];
+		post: Post;
 		og_data: OG[];
 		user: User;
 	};
 
-	let post = data.post[0];
+	let post = data.post;
 	let og_data = data.og_data[0];
 	let user = data.user;
 
@@ -189,6 +189,17 @@
 		console.log(res);
 	}
 
+	function initShare(node:Element){
+		const div = document.createElement('div');
+		div.classList.add('ya-share2');
+		div.setAttribute('data-curtain', '');
+		div.setAttribute('data-color-scheme', 'whiteblack');
+		div.setAttribute('data-services', 'vkontakte,odnoklassniki,telegram,viber,whatsapp,skype');
+		node.appendChild(div);
+		// @ts-ignore
+		window.Ya.share2(div);
+	}
+
 </script>
 
 <svelte:head>
@@ -259,7 +270,6 @@
 
 <div class="wrap">
 	<div class="work">
-		{#if post.publication || user.isAdmin}
 		<article class="post">
 			{#if user.isAdmin}<div class="publication"><Switch status={post.publication} on:click={changeStatus} /></div>{/if}
 			<div class="data">Апрель 07, 2023</div>
@@ -294,15 +304,10 @@
 				on:delPostNode={(event) => delPost(event.detail.idPost)}
 			/>
 			{/each}
-			<div class="share">
+			<div class="share" use:initShare>
 				<div class="share-title">Поделиться:</div>
-				<div class="ya-share2" 
-					data-curtain data-color-scheme="whiteblack" 
-					data-services="vkontakte,odnoklassniki,telegram,viber,whatsapp,skype">
-				</div>
 			</div>
 		</article>
-		{/if}
 	</div>
 </div>
 

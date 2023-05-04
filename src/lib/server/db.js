@@ -69,7 +69,7 @@ export async function getSinglePost(locals, slug){
                                        WHERE slug = $1 
                                        LIMIT 1`, [slug]);
 
-    return result.rows;
+    return result.rows[0];
 }
 
 /***************************************** Получаем Посты  ******************************************/
