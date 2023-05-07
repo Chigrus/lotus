@@ -21,16 +21,16 @@ export const POST:Action = async ({ request, locals, cookies }) => {
       throw error(403, `Пользователь с логином ${login} и указанным паролем не обнаружен!`);
     }
 
-    const token = await jwtSign({
-        id: userData[0].id,
-        role: userData[0].user_role
-    });
+    // const token = await jwtSign({
+    //     id: userData[0].id,
+    //     role: userData[0].user_role
+    // });
 
-    cookies.set('token', token, {
-      maxAge: 60 * 60 * 24 * 1,  //set cookie to expire after a one day
-      httpOnly: true,
-      path: '/',
-    });
+    // cookies.set('token', token, {
+    //   maxAge: 60 * 60 * 24 * 1,  //set cookie to expire after a one day
+    //   httpOnly: true,
+    //   path: '/',
+    // });
 
   
     return json(userData);
