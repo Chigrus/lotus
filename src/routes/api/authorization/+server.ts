@@ -26,11 +26,11 @@ export const POST:Action = async ({ request, locals, cookies }) => {
         role: userData[0].user_role
     });
 
-    // cookies.set('token', token, {
-    //   maxAge: 60 * 60 * 24 * 1,  //set cookie to expire after a one day
-    //   httpOnly: true,
-    //   path: '/',
-    // });
+    cookies.set('token', token, {
+      maxAge: 60 * 60 * 24 * 1,  //set cookie to expire after a one day
+      httpOnly: true,
+      path: '/',
+    });
 
   
     return json(token);
