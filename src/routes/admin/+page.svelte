@@ -1,5 +1,6 @@
 <script lang='ts'>
  	import Button from '../../components/Button.svelte';
+    import { goto } from '$app/navigation';
 
     let data = [
         {
@@ -48,11 +49,15 @@
                 body: JSON.stringify({ user }),
             });
 
-            let res = await response.json();
-            
+            //let res = await response.json();
 
-		    console.log(response.status);
-		    console.log(res);
+            if(response.status === 200){
+                console.log('Авторизация прошла успешно!');
+                goto("/");
+            }else{
+                console.log(response.status);
+            }
+		    //console.log(res);
         }
     }
 
