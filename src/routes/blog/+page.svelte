@@ -110,7 +110,7 @@
 	<OpenGraphEditor bind:dataOpenGraph={og_data}  bind:isOpenGraphEdit={isOpenGraphEdit} />
 {/if}
 
-<div class="wrap">
+<div class="wrap wrap__blog">
 	<div class="work">
 		<div class="posts">
 			{#each posts as post}
@@ -121,5 +121,9 @@
 </div>
 
 <style lang="scss">
-
+.wrap__blog{
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-color: var(--outline-primary);
+}
 </style>

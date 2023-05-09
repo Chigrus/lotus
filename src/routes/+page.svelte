@@ -47,10 +47,30 @@
 
 <div class="wrap">
 	<div class="work">
-		Главная
+		<div class="maincontent">
+			<div class="left-sidebar">
+				ccdsfdsf
+			</div>
+		</div>
 	</div>
 </div>
 
 <style lang="scss">
-	
+.maincontent{
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-color: var(--outline-primary);
+}
+
+.left-sidebar{
+	width: 240px;
+	box-sizing: border-box;
+	padding: 60px 0;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-color: var(--bg-5);
+}
 </style>

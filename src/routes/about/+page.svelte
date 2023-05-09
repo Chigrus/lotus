@@ -185,9 +185,17 @@
 </div>
 
 <style lang="scss">
+
+.wrap_about{
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-color: var(--outline-primary);
+	padding: 40px 0;	
+}
+
 .btns{
 	width: 100%;
-	margin: 20px 0;
+	margin-bottom: 20px;
 	display: flex;
 	justify-content: flex-end;
 }
@@ -218,7 +226,6 @@
 
 .post{
 	width: 100%;
-	margin: 40px 0;
 }
 
 :global(p) {

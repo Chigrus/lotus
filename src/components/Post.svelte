@@ -15,7 +15,6 @@
 .post{
     position: relative;
     width: 100%;
-    margin: 30px 0;
     padding: 50px 0;
     &::before{
         content: '';

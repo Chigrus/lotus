@@ -24,18 +24,24 @@
     position: relative;
     height: 100%;
     &.active{
-		&:before{
-            content: '';
-            position: absolute;
-            z-index: 1;
-            left: 0;
-            bottom: -2px;
-            width: 100%;
-            height: 2px;
-            background-color: rgba(0,0,0,0.75);
-        }
         .link{
-            color: #000;
+            color: rgba(0,0,0,0.6);
+        }
+    }
+    &:before{
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        right: 0;
+        width: 1px;
+        height: 12px;
+        margin-top: -6px;
+        background-color: rgba(0,0,0,0.3);
+    }
+    &:last-child{
+        &:before{
+            content: none;
         }
     }
 }
@@ -45,8 +51,10 @@
     height: 100%;
     padding: 0 10px;
     align-items: center;
-    color: #272727;
+    color: var(--text-primary);
     text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
 }
 
 @media only screen and (max-width: 639px){
