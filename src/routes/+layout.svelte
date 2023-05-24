@@ -30,7 +30,7 @@
 		<div class="work">
 			<div class="name">
 				<div class="title">Идейный друг</div>
-				<div class="subtitle">идеи, которые помогают найти себя и осмелиться жить по своему</div>
+				<div class="subtitle">идеи, которые помогают найти себя и осмелиться жить по-своему</div>
 			</div>
 		</div>
 	</div>
