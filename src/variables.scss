@@ -2,11 +2,16 @@
 :root {
 	/********************* Fonts *****************************/
     --font-body: Rubik, Arial, 'Helvetica Neue', sans-serif;
+    --font-h1: Playfair, Arial, 'Helvetica Neue', sans-serif;
+    --font-title: Oswald, Arial, 'Helvetica Neue', sans-serif;
+    --font-subtitle: OpenSans, Arial, 'Helvetica Neue', sans-serif;
+    --font-text: Georgia, Arial, 'Helvetica Neue', sans-serif;
 
 	/********************* Text *****************************/
 	--text-primary: #000;
 	--text-secondary: #fff;
 	--text-third: #363636;
+	--hover-primary: rgba(0,0,0,0.6);
 
 	/********************* Background *****************************/
 	--bg-primary: #fff;
@@ -14,6 +19,7 @@
 	--bg-third: #e5e5e5;
 	--bg-4: #f4f4f4;
 	--bg-5: #d4d4d4;
+	--bg-hover-1: rgba(0,0,0,0.6);
 
 	/********************* Outline *****************************/
 	--outline-primary: #000;

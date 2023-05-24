@@ -16,7 +16,10 @@
 	<div class="wrap wrap__topheader">
 		<div class="work">
 			<div class="topheader">
-				<a href="/" class="logo">Главная</a>
+				<div class="left">
+					<a href="/" class="logo">Главная</a>
+					<div class="author">Авторский блог Александры Черновой</div>
+				</div>
 				<nav class="menu">
 					<Nav />
 				</nav>
@@ -25,7 +28,10 @@
 	</div>
 	<div class="wrap wrap__header">
 		<div class="work">
-			<div class="title_header">Идейный друг</div>
+			<div class="name">
+				<div class="title">Идейный друг</div>
+				<div class="subtitle">идеи, которые помогают найти себя и осмелиться жить по своему</div>
+			</div>
 		</div>
 	</div>
 
@@ -54,6 +60,18 @@
 	justify-content: space-between;
 }
 
+.left{
+	display: flex;
+	align-items: center;
+}
+
+.author{
+	font-family: var(--font-subtitle);
+	margin-left: 15px;
+	font-weight: 400;
+	font-size: 14px;
+}
+
 .logo{
 	display: flex;
 	align-items: center;
@@ -79,14 +97,52 @@
 	height: 100%;
 }
 
-.title_header{
+.name{
+	width: 100%;
+	padding: 30px 0;
+}
+
+.title{
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	padding: 50px 0;
-	text-transform: uppercase;
-	font-weight: 500;
-	font-size: 36px;
-	letter-spacing: 2px;
+	font-family: var(--font-h1);
+	font-weight: 800;
+	font-size: 80px;
+	letter-spacing: 1px;
+	line-height: 1em;
+}
+
+.subtitle{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	font-family: var(--font-subtitle);
+	font-size: 16px;
+	margin-top: 15px;
+	font-weight: 300;
+	font-style: italic;
+}
+
+@media only screen and (max-width: 979px){
+	.title{
+		font-size: 64px;
+	}	
+}
+
+@media only screen and (max-width: 639px){
+	.title{
+		font-size: 48px;
+	}
+	
+	.author{
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 479px){
+	.title{
+		font-size: 42px;
+	}
 }
 </style>
