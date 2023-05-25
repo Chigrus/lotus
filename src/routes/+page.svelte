@@ -311,7 +311,7 @@
 		width: 16px;
 		height: 16px;
 		margin-top: -8px;
-		background-image: url(svg/arrow-next.svg);
+		background-image: url(/svg/arrow-next.svg);
 		background-repeat: no-repeat;
 		background-position: top right;
 		background-size: 14px auto;
