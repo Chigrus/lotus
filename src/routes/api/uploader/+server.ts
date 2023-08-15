@@ -10,8 +10,8 @@ export const PUT: RequestHandler = async ({ request }) => {
     }
 
     const date = new Date().toISOString().match(DATE_RE)!.slice(1).join('-');
-    const file = path.join(process.cwd(), '/static/uploads', `${date}.jpg`);
-    const url = `./uploads/${date}.jpg`;
+    const file = path.join(process.cwd(), 'static/uploads', `${date}.jpg`);
+    const url = `/uploads/${date}.jpg`;
 
     const reader = request.body.getReader();
     const writer = createWriteStream(file);
