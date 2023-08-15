@@ -329,7 +329,8 @@
         border: 1px solid #000;
         border-bottom: 0;
         padding: 5px;
-        background-color: rgba(66,50,50,0.1)
+        background-color: rgba(66,50,50,0.1);
+        padding-right: 50px;
     }
     .counter{
         position: absolute;
@@ -337,7 +338,10 @@
         right: 0;
         display: flex;
         align-items: center;
-        height: 34px;
+        justify-content: center;
+        min-width: 34px;
+        box-sizing: border-box;
+        height: 100%;
         background-color: #ee3f02;
         color: #fff;
         padding: 0 10px;
@@ -437,4 +441,10 @@
 	:global(.editor p a){
         color: red;
 	}
+
+    @media only screen and (max-width: 639px){
+        .panel{
+            font-size: 12px;
+        }
+    }
 </style>

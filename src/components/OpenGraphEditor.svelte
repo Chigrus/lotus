@@ -94,9 +94,10 @@
 <style>
     .og_content{
         display: inline-block;
-        padding-right: 10px;
         max-height: 60vh;
         overflow-y: auto;
+		box-sizing: border-box;
+		padding-right: 10px;
     }
     
     .og_inner{
@@ -167,4 +168,15 @@
     .btnEditOgImage.hide{
         display: none;
     }
+
+	@media only screen and (max-width: 639px){
+		.og_content{
+			padding-right: 0;
+		}
+
+		.og_inner{
+			width: 100%;
+			box-sizing: border-box;
+		}
+	}
     </style>

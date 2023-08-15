@@ -97,6 +97,9 @@
 }
 
 @media only screen and (max-width: 639px){
-
+    .popup{
+        width: calc(100% - 20px);
+        min-width: inherit;
+    }
 }
 </style>
