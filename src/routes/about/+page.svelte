@@ -1,124 +1,47 @@
 <script lang='ts'>
-	type Post = {
-		id: number;
-		type: string;
-		content: string;
-	}
-	type User = {
-		isAdmin: boolean;
-		isEditor: boolean;
-	}
-	type OG = {
-		title: string;
-		description: string;
-		og_type: string;
-		og_title: string;
-		og_description: string;
-		og_url: string;
-		og_image: string;
-		og_image_type: string;
-		og_image_width: string;
-		og_image_height: string;
-		og_article: Object;
-		og_profile: Object;
-		og_video: Object;
-	}
 
-	export let data:{
-		og_data: OG[];
-		post: {
-			id: number;
-			post: Post[];
-		}[];
-		user: User;
-	};
+	import type {OG, User, Post} from '../types';
 
-	let og_data = data.og_data[0];
-	let post = data.post[0];
-	let user = data.user;
-
-	import PostTag from '../../components/PostTag.svelte';
-	import Popup from '../../components/Popup.svelte';
-	import TagsInsert from '../../components/TagsInsert.svelte';
+	import PostNodesEditor from '../../components/PostNodesEditor.svelte';
+	import PostNodesShow from '../../components/PostNodesShow.svelte';
 	import AdminButtons from '../../components/AdminButtons.svelte';
 	import BtnAdminEdit from '../../components/BtnAdminEdit.svelte';
 	import OpenGraphEditor from '../../components/OpenGraphEditor.svelte';
 
-	let isEdited = false;
-	let isAddNode = false;
-	let idAddNode:number;
+	export let data:{
+		og_data: OG[];
+		post: Post;
+		user: User;
+	};
+
+	let og_data = data.og_data[0];
+	let post = data.post;
+	let user = data.user;
 
 	let isOpenGraphEdit = false;
 
-	$: textPost = post.post.sort((a, b) => a.id - b.id);
-
-	function editPost(){
-		isEdited = true;
-	}
-
-	function previewPost(){
-		isEdited = false;
-	}
-
-	function delPost(id:number){
-		textPost = textPost.filter((item) => item.id !== id);
-		for (let i = id-1; i < textPost.length; i++) {
-			textPost[i].id = textPost[i].id - 1;
-		}
-	}
-
-	function upPost(id:number){
-		if(id != 1){
-			textPost[id-1].id = id-1;
-			textPost[id-2].id = id;
-			textPost.sort((a, b) => a.id - b.id);
-		};
-	}
-
-	function downPost(id:number){
-		if(id != textPost.length){
-			textPost[id-1].id = id+1;
-			textPost[id].id = id;
-			textPost.sort((a, b) => a.id - b.id);
-		};
-	}
-
-	function addPost(id:number){
-		isAddNode = true;
-		idAddNode = id;
-	}
-
-	function addNode(typeNode:string, contentInner:string){
-		if(idAddNode === textPost.length){
-			textPost = [...textPost, {id: idAddNode+1, type: typeNode, content: contentInner}];
-		}else{
-			for (let i = idAddNode-1; i < textPost.length; i++) {
-				textPost[i].id = textPost[i].id + 1;
-			}
-			textPost = [...textPost, {id: idAddNode+1, type: typeNode, content: contentInner}];
-			textPost.sort((a, b) => a.id - b.id);
-		}
-		isAddNode = false;
-	}
-
 	async function savePostFn(){
+
+		for (let node of post.post){
+            delete node.isEdit;
+        }
 
 		const response = await fetch('api/updatepost', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
 			},
-			body: JSON.stringify({ post: textPost, id: post.id }),
+			body: JSON.stringify({ post: post.post, id: post.id }),
 		});
-
-		let total = await response.json();
-
-		console.log(total);
 
 	}
 
 	function openGraphEdit(){
 		isOpenGraphEdit = true;
+	}
+
+	function editNode(id:number){
+		console.log(id);
 	}
 
 </script>
@@ -138,15 +61,6 @@
 	<meta name="twitter:description" content="{og_data.description}">
 </svelte:head>
 
-<Popup bind:isOpen={isAddNode}>
-	<slot slot="title">
-		Добавить новый блок
-	</slot>
-	<slot slot="content">
-		<TagsInsert on:onSelectNode={(event) => addNode(event.detail.typeNode, event.detail.contentInner)} />
-	</slot>
-</Popup>
-
 {#if isOpenGraphEdit}
 	<OpenGraphEditor bind:dataOpenGraph={og_data}  bind:isOpenGraphEdit={isOpenGraphEdit} />
 {/if}
@@ -161,24 +75,17 @@
 	<div class="work">
 
 		{#if user.isAdmin}
-		<div class="btns">
-			<button class="btn edit" on:click={editPost}>Редактор</button>
-			<button class="btn preview" on:click={previewPost}>Просмотр</button>
-			<button class="btn save" on:click={savePostFn}>Сохранить</button>
-		</div>
+			<div class="btns">
+				<button class="btn save" on:click={savePostFn}>Сохранить</button>
+			</div>
 		{/if}
 
 		<article class="post">
-			{#each textPost as post}
-			<PostTag 
-				post={post} 
-				isEdited={isEdited}
-				on:addPostNode={(event) => addPost(event.detail.idPost)}
-				on:upPostNode={(event) => upPost(event.detail.idPost)}
-				on:downPostNode={(event) => downPost(event.detail.idPost)}
-				on:delPostNode={(event) => delPost(event.detail.idPost)}
-			/>
-			{/each}
+			{#if user.isAdmin}
+				<PostNodesEditor bind:nodes={post.post} />
+			{:else}
+				<PostNodesShow bind:nodes={post.post} />
+			{/if}
 		</article>
 
 	</div>
@@ -228,20 +135,8 @@
 	width: 100%;
 }
 
-:global(p) {
-  font-size: 16px;
-  line-height: 1.7em;
+:global(h1, h2, h3) {
+  text-align: center;
 }
 
-:global(h1) {
-  font-size: 24px;
-}
-
-:global(h2) {
-  font-size: 20px;
-}
-
-:global(h3) {
-  font-size: 18px;
-}
 </style>

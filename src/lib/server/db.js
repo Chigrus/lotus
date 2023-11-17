@@ -56,7 +56,7 @@ export async function getPost(locals, post_id){
                                        WHERE id = $1 
                                        LIMIT 1`, [post_id]);
 
-    return result.rows;
+    return result.rows[0];
 }
 
 /***************************************** Получаем Пост по slug ******************************************/

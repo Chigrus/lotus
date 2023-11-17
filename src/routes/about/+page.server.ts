@@ -14,6 +14,7 @@ export const load:Action= async ({ locals, cookies }) => {
     throw error(404);
   }
 
+
   if(!user.isAdmin && !post.publication){
     throw error(404);
   }
