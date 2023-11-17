@@ -131,6 +131,12 @@
 
 :global(h1, h2, h3) {
   text-align: center;
+  font-family: var(--font-h1);
+  font-weight: 700;
+}
+
+:global(p) {
+  font-family: var(--font-text);
 }
 
 </style>
