@@ -125,12 +125,6 @@
 	margin-left: 0;
 }
 
-.wrap_about{
-	.work{
-		max-width: 700px;
-	}
-}
-
 .post{
 	width: 100%;
 }
