@@ -3,7 +3,7 @@
 </script>
 
 <article class="post">
-    <div class="data">Апрель 07, 2023</div>
+    <!-- <div class="data">Апрель 07, 2023</div> -->
     <div class="title">{@html post.title}</div>
     <div class="text">{@html post.text}</div>
     <div class="line">
@@ -28,13 +28,13 @@
     }
 }
 
-.data{
-    width: 100%;
-    text-align: center;
-    color: var(--text-third);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+// .data{
+//     width: 100%;
+//     text-align: center;
+//     color: var(--text-third);
+//     text-transform: uppercase;
+//     letter-spacing: 2px;
+// }
 
 .title{
     width: 100%;

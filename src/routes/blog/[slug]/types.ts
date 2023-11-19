@@ -1,7 +1,7 @@
 export type Article = {
-    id: number;
     type: string;
     content: string;
+    [key: string]: any;
 }
 export type User = {
     isAdmin: boolean;
@@ -30,6 +30,7 @@ export type InfoEditBlock = {
 }
 export type Post = {
     id: number;
+    date: Date;
     slug: string;
     title: string;
     text: string;

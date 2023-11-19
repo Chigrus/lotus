@@ -135,7 +135,7 @@
   font-weight: 700;
 }
 
-:global(p) {
+:global(p, ul li) {
   font-family: var(--font-text);
 }
 

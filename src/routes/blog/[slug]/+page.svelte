@@ -1,4 +1,5 @@
 <script lang='ts'>
+
 	import type {Post, EditField, OG, User, EditUrl} from './types'
 	import { goto } from '$app/navigation';
 
@@ -29,9 +30,7 @@
 		url: '',
 	};
 
-	import PostTag from '../../../components/PostTag.svelte';
 	import Popup from '../../../components/Popup.svelte';
-	import TagsInsert from '../../../components/TagsInsert.svelte';
 	import AdminButtons from '../../../components/AdminButtons.svelte';
 	import BtnAdminEdit from '../../../components/BtnAdminEdit.svelte';
 	import OpenGraphEditor from '../../../components/OpenGraphEditor.svelte';
@@ -41,76 +40,24 @@
 
 	import Editor from 'cl-editor';
 
-	let isEdited = false;
-	let isAddNode = false;
-	let idAddNode:number;
+	import PostNodesEditor from '../../../components/PostNodesEditor.svelte';
+	import PostNodesShow from '../../../components/PostNodesShow.svelte';
 
 	let isOpenGraphEdit = false;
 
-	$: textPost = post.post.sort((a, b) => a.id - b.id);
-
-	function editPost(){
-		isEdited = true;
-	}
-
-	function previewPost(){
-		isEdited = false;
-	}
-
-	function delPost(id:number){
-		textPost = textPost.filter((item) => item.id !== id);
-		for (let i = id-1; i < textPost.length; i++) {
-			textPost[i].id = textPost[i].id - 1;
-		}
-	}
-
-	function upPost(id:number){
-		if(id != 1){
-			textPost[id-1].id = id-1;
-			textPost[id-2].id = id;
-			textPost.sort((a, b) => a.id - b.id);
-		};
-	}
-
-	function downPost(id:number){
-		if(id != textPost.length){
-			textPost[id-1].id = id+1;
-			textPost[id].id = id;
-			textPost.sort((a, b) => a.id - b.id);
-		};
-	}
-
-	function addPost(id:number){
-		isAddNode = true;
-		idAddNode = id;
-	}
-
-	function addNode(typeNode:string, contentInner:string){
-		if(idAddNode === textPost.length){
-			textPost = [...textPost, {id: idAddNode+1, type: typeNode, content: contentInner}];
-		}else{
-			for (let i = idAddNode-1; i < textPost.length; i++) {
-				textPost[i].id = textPost[i].id + 1;
-			}
-			textPost = [...textPost, {id: idAddNode+1, type: typeNode, content: contentInner}];
-			textPost.sort((a, b) => a.id - b.id);
-		}
-		isAddNode = false;
-	}
-
 	async function savePostFn(){
+
+		for (let node of post.post){
+            delete node.isEdit;
+        }
 
 		const response = await fetch('/api/updatepost', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
 			},
-			body: JSON.stringify({ post: textPost, id: post.id }),
+			body: JSON.stringify({ post: post.post, id: post.id }),
 		});
-
-		let total = await response.json();
-
-		console.log(total);
 
 	}
 
@@ -124,8 +71,6 @@
 	}
 
 	async function saveBlock(dataField:EditField){
-		//console.log(dataField);
-		//console.log(post[dataField.info.field]);
 		const response = await fetch('/api/update', {
 			method: 'POST',
 			headers: {
@@ -134,9 +79,7 @@
 			body: JSON.stringify({ id: dataField.info.id, field: dataField.info.field, value: post[dataField.info.field]  }),
 		});
 
-		let total = await response.json();
-
-		console.log(total);
+		edit_field.popup = false;
 	}
 
 	function urlEdit(url:string){
@@ -217,15 +160,6 @@
 	<meta name="twitter:description" content="{og_data.description}">
 </svelte:head>
 
-<Popup bind:isOpen={isAddNode}>
-	<slot slot="title">
-		Добавить новый блок
-	</slot>
-	<slot slot="content">
-		<TagsInsert on:onSelectNode={(event) => addNode(event.detail.typeNode, event.detail.contentInner)} />
-	</slot>
-</Popup>
-
 <Popup bind:isOpen={edit_url.popup}>
 	<slot slot="title">
 		Редактировать url поста
@@ -272,7 +206,7 @@
 	<div class="work">
 		<article class="post">
 			{#if user.isAdmin}<div class="publication"><Switch status={post.publication} on:click={changeStatus} /></div>{/if}
-			<div class="data">Апрель 07, 2023</div>
+			<!-- <div class="data">Апрель 07, 2023</div> -->
 			<div class="title">
 				{@html post.title}
 				{#if user.isAdmin}<BtnEditBlock 
@@ -289,21 +223,14 @@
 			</div>
 			{#if user.isAdmin}
 			<div class="btns">
-				<button class="btn edit" on:click={editPost}>Редактор</button>
-				<button class="btn preview" on:click={previewPost}>Просмотр</button>
 				<button class="btn save" on:click={savePostFn}>Сохранить</button>
 			</div>
 			{/if}
-			{#each post.post as single_post}
-			<PostTag 
-				post={single_post} 
-				isEdited={isEdited}
-				on:addPostNode={(event) => addPost(event.detail.idPost)}
-				on:upPostNode={(event) => upPost(event.detail.idPost)}
-				on:downPostNode={(event) => downPost(event.detail.idPost)}
-				on:delPostNode={(event) => delPost(event.detail.idPost)}
-			/>
-			{/each}
+			{#if user.isAdmin}
+				<PostNodesEditor bind:nodes={post.post} />
+			{:else}
+				<PostNodesShow bind:nodes={post.post} />
+			{/if}
 			<div class="share" use:initShare>
 				<div class="share-title">Поделиться:</div>
 			</div>
@@ -339,13 +266,13 @@
 	padding: 50px 0;
 }
 
-.data{
-    width: 100%;
-    text-align: center;
-    color: var(--text-third);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+// .data{
+//     width: 100%;
+//     text-align: center;
+//     color: var(--text-third);
+//     text-transform: uppercase;
+//     letter-spacing: 2px;
+// }
 
 .title{
 	position: relative;
@@ -354,6 +281,7 @@
     text-align: center;
     font-size: 28px;
     margin-top: 20px;
+	font-family: var(--font-h1);
 }
 
 .text{
@@ -364,6 +292,7 @@
     font-size: 16px;
     line-height: 1.8em;
     margin-top: 30px;
+	font-family: var(--font-text)
 }
 
 .editUrl{
@@ -386,20 +315,13 @@
 	margin-right: 5px;
 }
 
-:global(p) {
-  font-size: 16px;
-  line-height: 1.7em;
+:global(h1, h2, h3) {
+  text-align: center;
+  font-family: var(--font-h1);
+  font-weight: 700;
 }
 
-:global(h1) {
-  font-size: 24px;
-}
-
-:global(h2) {
-  font-size: 20px;
-}
-
-:global(h3) {
-  font-size: 18px;
+:global(p, ul li) {
+  font-family: var(--font-text);
 }
 </style>
