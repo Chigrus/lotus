@@ -19,10 +19,6 @@ export const load:Action= async ({ locals, cookies }) => {
     throw error(404);
   }
 
-  // setHeaders({
-	// 	'cache-control': 'max-age=31536000',
-	// });
-
   return {
     og_data, post, user,
   };
