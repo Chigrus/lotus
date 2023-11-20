@@ -231,6 +231,11 @@
 			{:else}
 				<PostNodesShow bind:nodes={post.post} />
 			{/if}
+			{#if user.isAdmin}
+			<div class="btns">
+				<button class="btn save" on:click={savePostFn}>Сохранить</button>
+			</div>
+			{/if}
 			<div class="share" use:initShare>
 				<div class="share-title">Поделиться:</div>
 			</div>
@@ -315,13 +320,14 @@
 	margin-right: 5px;
 }
 
-:global(h1, h2, h3) {
+:global(h1, h2, h3, h4) {
   text-align: center;
   font-family: var(--font-h1);
   font-weight: 700;
+  margin-top: 25px;
 }
 
-:global(p, ul li) {
+:global(p, ul li, ol li) {
   font-family: var(--font-text);
 }
 </style>

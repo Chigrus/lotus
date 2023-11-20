@@ -129,13 +129,14 @@
 	width: 100%;
 }
 
-:global(h1, h2, h3) {
+:global(h1, h2, h3, h4) {
   text-align: center;
   font-family: var(--font-h1);
   font-weight: 700;
+  margin-top: 25px;
 }
 
-:global(p, ul li) {
+:global(p, ul li, ol li) {
   font-family: var(--font-text);
 }
 
