@@ -20,9 +20,6 @@ export const load:Action= async ({ locals, cookies }) => {
   }
 
   return {
-    headers: {
-      'cache-control': 'public, max-age=3600'
-    },
     og_data, post, user,
   };
 }
