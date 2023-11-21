@@ -11,7 +11,7 @@
 
 	const cedit: ComponentType = Editor;
 
-    let actions = ['b', 'i', 'undo', 'redo', ];
+    let actions = ['b', 'i', 'a', 'undo', 'redo', ];
     let isAddNode = false;
     let idAddNode:number;
 

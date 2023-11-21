@@ -38,4 +38,9 @@
     background-image: url(/svg/addpost.svg);
     background-size: 60% 60%;
 }
+
+.btn.save{
+    background-image: url(/svg/save.svg);
+    background-size: 60% 60%;
+}
 </style>

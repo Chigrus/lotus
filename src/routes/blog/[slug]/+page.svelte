@@ -199,6 +199,7 @@
 <AdminButtons>
 	<BtnAdminEdit title="OpenGraph" bg="opengraph" on:click="{openGraphEdit}" />
 	<BtnAdminEdit title="URL" bg="url" on:click="{() => urlEdit(post.slug)}" />
+	<BtnAdminEdit title="Сохранить" bg="save" on:click={savePostFn} />
 </AdminButtons>
 {/if}
 
@@ -230,11 +231,6 @@
 				<PostNodesEditor bind:nodes={post.post} />
 			{:else}
 				<PostNodesShow bind:nodes={post.post} />
-			{/if}
-			{#if user.isAdmin}
-			<div class="btns">
-				<button class="btn save" on:click={savePostFn}>Сохранить</button>
-			</div>
 			{/if}
 			<div class="share" use:initShare>
 				<div class="share-title">Поделиться:</div>
