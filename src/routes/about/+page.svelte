@@ -67,7 +67,8 @@
 
 {#if user.isAdmin}
 <AdminButtons>
-	<BtnAdminEdit title="" bg="opengraph" on:click="{openGraphEdit}" />
+	<BtnAdminEdit title="OpenGraph" bg="opengraph" on:click="{openGraphEdit}" />
+	<BtnAdminEdit title="Сохранить" bg="save" on:click={savePostFn} />
 </AdminButtons>
 {/if}
 
