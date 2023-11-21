@@ -215,13 +215,15 @@
 					info={{id: post.id, field: 'title', type: 'input', title: 'Редактирования названия поста:'}}
 				/>{/if}
 			</div>
-			<div class="text">
-				{@html post.text}
-				{#if user.isAdmin}<BtnEditBlock 
-					on:getData={(event) => { edit_field = event.detail; }}
-					info={{id: post.id, field: 'text', type: 'input', title: 'Редактирования краткой записи:'}}
-				/>{/if}
-			</div>
+			{#if user.isAdmin}
+				<div class="text">
+					{@html post.text}
+					{#if user.isAdmin}<BtnEditBlock 
+						on:getData={(event) => { edit_field = event.detail; }}
+						info={{id: post.id, field: 'text', type: 'input', title: 'Редактирования краткой записи:'}}
+					/>{/if}
+				</div>
+			{/if}
 			{#if user.isAdmin}
 			<div class="btns">
 				<button class="btn save" on:click={savePostFn}>Сохранить</button>
