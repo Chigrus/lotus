@@ -26,6 +26,9 @@
     {#if node.type === 'ol'}
         <ol>{@html node.content}</ol>
     {/if}
+    {#if node.type === 'sep1'}
+      <div class="sep1"></div>
+    {/if}
 {/each}
 
 <style lang="scss">
@@ -52,5 +55,21 @@ p{
 
 ul :global(li){
   font-size: 16px;
+}
+
+.sep1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px 0;
+    &::before{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: red;
+    }
 }
 </style>

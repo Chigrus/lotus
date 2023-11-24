@@ -12,6 +12,8 @@
 	const cedit: ComponentType = Editor;
 
     let actions = ['b', 'i', 'a', 'undo', 'redo', ];
+    let fields = ['base', 'separator'];  // 'base', 'separator', 'code'
+
     let isAddNode = false;
     let idAddNode:number;
 
@@ -76,7 +78,7 @@
 		Добавить новый блок
 	</slot>
 	<slot slot="content">
-		<TagsInsert on:onSelectNode={(e) => addNode(idAddNode, e.detail.typeNode, e.detail.contentInner)} />
+		<TagsInsert on:onSelectNode={(e) => addNode(idAddNode, e.detail.typeNode, e.detail.contentInner)} fields={fields} />
 	</slot>
 </Popup>
 
@@ -84,7 +86,16 @@
     <div class="content">
         <div class="main" on:mousedown={() => clickNode(index)}>
             {#if node.isEdit}
-                <svelte:component this={cedit} actions={actions} html={node.content} on:change="{(e) => editHtml(e, index)}" height='auto' />
+                {#if node.type === 'sep1'}
+                    <div class="seporator">
+                        <div class="seporator_top"></div>
+                        <div class="seporator_container">
+                            <div class="sep1"></div>
+                        </div>
+                    </div>
+                {:else}
+                    <svelte:component this={cedit} actions={actions} html={node.content} on:change="{(e) => editHtml(e, index)}" height='auto' />
+                {/if}
             {:else}
                 {#if node.type === 'h1'}
                     <h1>{@html node.content}</h1>
@@ -106,6 +117,9 @@
                 {/if}
                 {#if node.type === 'ol'}
                     <ol>{@html node.content}</ol>
+                {/if}
+                {#if node.type === 'sep1'}
+                    <div class="sep1"></div>
                 {/if}
             {/if}
         </div>
@@ -230,4 +244,46 @@ p{
 ul :global(li){
   font-size: 16px;
 }
+/*************************** Для разделителей ********************/
+.seporator{
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    box-sizing: border-box;
+    border: 1px solid rgba(10, 10, 10, 0.1);
+    .seporator_top{
+        display: block;
+        width: 100%;
+        height: 35px;
+        background-color: #ecf0f1;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+    }
+    .seporator_container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+    }
+}
+
+.sep1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px 0;
+    &::before{
+        content: '';
+        display: block;
+        width: 250px;
+        height: 18px;
+        background-image: url(/svg/sep1.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+/*************************** Для разделителей ********************/
 </style>
