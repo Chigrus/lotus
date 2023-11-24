@@ -67,9 +67,12 @@ ul :global(li){
     &::before{
         content: '';
         display: block;
-        width: 100%;
-        height: 1px;
-        background-color: red;
+        width: 250px;
+        height: 18px;
+        background-image: url(/svg/sep1.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }
 </style>
