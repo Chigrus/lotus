@@ -10,12 +10,12 @@
 
 	export let data:{
 		og_data: OG[];
-		post: Post;
+		post: string;
 		user: User;
 	};
 
 	let og_data = data.og_data[0];
-	let post = data.post;
+	let post:Post = JSON.parse(data.post);
 	let user = data.user;
 
 	let isOpenGraphEdit = false;

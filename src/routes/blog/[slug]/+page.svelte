@@ -4,12 +4,12 @@
 	import { goto } from '$app/navigation';
 
 	export let data:{
-		post: Post;
+		post: string;
 		og_data: OG[];
 		user: User;
 	};
 
-	let post = data.post;
+	let post:Post = JSON.parse(data.post);
 	let og_data = data.og_data[0];
 	let user = data.user;
 

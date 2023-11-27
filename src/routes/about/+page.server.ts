@@ -20,6 +20,6 @@ export const load:Action= async ({ locals, cookies }) => {
   }
 
   return {
-    og_data, post, user,
+    og_data, post:JSON.stringify(post), user,
   };
 }

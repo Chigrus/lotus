@@ -16,7 +16,7 @@ export const load:Action= async ({ locals, params, cookies }) => {
 
   return {
     og_data: await db.getOG(locals, post.og_id),
-    post,
+    post:JSON.stringify(post),
     user,
   };
 }
