@@ -15,7 +15,7 @@
 	};
 
 	let og_data = data.og_data[0];
-	let post:Post = JSON.parse(data.post);
+	let post:Post = JSON.parse(new TextDecoder().decode(Uint8Array.from(data.post.match(/.{2}/g)!, b => parseInt(b, 16))));
 	let user = data.user;
 
 	let isOpenGraphEdit = false;

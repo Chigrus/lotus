@@ -16,7 +16,7 @@ export const load:Action= async ({ locals, params, cookies }) => {
 
   return {
     og_data: await db.getOG(locals, post.og_id),
-    post:JSON.stringify(post),
+    post:Array.from(new TextEncoder().encode(JSON.stringify(post)), b => b.toString(16)).join(''),
     user,
   };
 }
