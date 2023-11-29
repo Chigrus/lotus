@@ -34,6 +34,12 @@ export async function GET() {
                 <changefreq>daily</changefreq>
                 <priority>0.5</priority>
             </url>
+            <url>
+                <loc>https://ideas-friend.ru/blog/meaning-of-life</loc>
+                <lastmod>2023-11-21</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>0.5</priority>
+            </url>
 		</urlset>`.trim(),
 		{
 			headers: {
