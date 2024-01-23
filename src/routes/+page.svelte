@@ -53,19 +53,10 @@
 					<div class="widget_title">Свежие статьи</div>
 					<ul class="widget_content">
 						<li>
-							<a href="/">Где искать смысл жизни</a>
+							<a href="/blog/meaning-of-life">В чем смысл жизни?</a>
 						</li>
 						<li>
-							<a href="/">Как полюбить свою внешность</a>
-						</li>
-						<li>
-							<a href="/">Как понять, чем вы хотите заниматься</a>
-						</li>
-						<li>
-							<a href="/">Как преодолеть тревожность</a>
-						</li>
-						<li>
-							<a href="/">Страхи, которые мешают делать любимое дело</a>
+							<a href="/blog/finding-a-hobby">Как найти свое любимое дело?</a>
 						</li>
 					</ul>
 					<div class="widget_content">
@@ -95,25 +86,18 @@
 				</div>
 				<div class="content_posts">
 					<article class="content_post">
-						<div class="content_post-top">Май 05, 2023</div>
-						<a href="/" class="content_post-title">Как понять, чем вы хотите заниматься</a>
-						<div class="content_post-text">Почему так сложно найти свое дело? Может быть, потому, что ты ищешь его во внешнем мире, среди чужих дел? 
-							А пойти за собственными желаниями ты боишься – потому что не веришь, что такой недотепа, как ты, мог придумать что-то нормальное.</div>
-						<a href="/" class="content_post-more">Читать далее</a>
+						<!-- <div class="content_post-top">Май 05, 2023</div> -->
+						<a href="/blog/meaning-of-life" class="content_post-title">В чем смысл жизни?</a>
+						<div class="content_post-text">В чем смысл жизни? Глупый вопрос? – не думаю. Если не понимаешь, ради чего живешь, то как сможешь 
+							выбирать поступки, которые осчастливят, а не разочаруют? В этой статье я рассказываю, из-за чего мы теряем смысл жизни и где его найти.</div>
+						<a href="/blog/meaning-of-life" class="content_post-more">Читать далее</a>
 					</article>
 					<article class="content_post">
-						<div class="content_post-top">Май 07, 2023</div>
-						<a href="/" class="content_post-title">Страхи, которые мешают делать любимое дело</a>
-						<div class="content_post-text">Нас со всех сторон стыдят: хватит лениться, давай уже действуй, работай над своими целями! И всё бы хорошо, 
-							только как над ними работать? Ведь в нас живут такие мохнатые страхи, что перспектива приступить к делу ощущается как самоубийство.</div>
-						<a href="/" class="content_post-more">Читать далее</a>
-					</article>
-					<article class="content_post">
-						<div class="content_post-top">Май 10, 2023</div>
-						<a href="/" class="content_post-title">Как полюбить свою внешность</a>
-						<div class="content_post-text">Всю жизнь считала себя некрасивой. Ну а как, если отражение в зеркале объективно далеко от совершенства? 
-							Мне казалось: я никому не понравлюсь как человек и как эксперт, если сначала не сделаю из себя супермодель.</div>
-						<a href="/" class="content_post-more">Читать далее</a>
+						<!-- <div class="content_post-top">Май 07, 2023</div> -->
+						<a href="/blog/finding-a-hobby" class="content_post-title">Как найти свое любимое дело?</a>
+						<div class="content_post-text">Почему так сложно понять, чем вы хотите заниматься в жизни? Может, вы просто боитесь своих 
+							настоящих интересов и не решаетесь их реализовать?</div>
+						<a href="/blog/finding-a-hobby" class="content_post-more">Читать далее</a>
 					</article>
 				</div>
 			</div>
