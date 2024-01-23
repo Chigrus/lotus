@@ -17,8 +17,10 @@
 		<div class="work">
 			<div class="topheader">
 				<div class="left">
-					<a href="/" class="logo">Главная</a>
-					<div class="author">Авторский блог Александры Черновой</div>
+					<a href="/" class="top_link">
+						<span class="logo">Главная</span>
+						<div class="author">Авторский блог Александры Черновой</div>
+					</a>
 				</div>
 				<nav class="menu">
 					<Nav />
@@ -50,6 +52,12 @@
 
 .wrap__topheader{
 	background-color: transparent;
+}
+
+.top_link{
+	display: flex;
+	align-items: center;
+	text-decoration: none;
 }
 
 .topheader{
