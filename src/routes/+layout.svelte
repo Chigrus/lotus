@@ -30,10 +30,10 @@
 	</div>
 	<div class="wrap wrap__header">
 		<div class="work">
-			<div class="name">
+			<a href="/" class="name">
 				<div class="title">Идейный друг</div>
 				<div class="subtitle">идеи, которые помогают найти себя и осмелиться жить по-своему</div>
-			</div>
+			</a>
 		</div>
 	</div>
 
@@ -106,8 +106,10 @@
 }
 
 .name{
+	display: block;
 	width: 100%;
 	padding: 30px 0;
+	text-decoration: none;
 }
 
 .title{
