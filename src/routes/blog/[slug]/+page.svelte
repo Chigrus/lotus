@@ -285,6 +285,7 @@
     font-size: 28px;
     margin-top: 20px;
 	font-family: var(--font-h1);
+	font-weight: 700;
 }
 
 .text{
