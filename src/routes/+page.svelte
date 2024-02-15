@@ -260,6 +260,7 @@
 	font-size: 28px;
 	font-weight: 600;
 	text-transform: capitalize;
+	text-align: left;
 }
 
 .about_line_text{
