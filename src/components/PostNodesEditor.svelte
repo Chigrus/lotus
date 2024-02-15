@@ -9,6 +9,7 @@
 
     export let nodes: Nodes;
 
+	// @ts-ignore
 	const cedit: ComponentType = Editor;
 
     let actions = ['b', 'i', 'a', 'undo', 'redo', ];

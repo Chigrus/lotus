@@ -43,6 +43,11 @@
 	import PostNodesEditor from '../../../components/PostNodesEditor.svelte';
 	import PostNodesShow from '../../../components/PostNodesShow.svelte';
 
+	import type { ComponentType } from 'svelte';
+
+	// @ts-ignore
+	const cedit: ComponentType = Editor;
+
 	let isOpenGraphEdit = false;
 
 	async function savePostFn(){
@@ -178,10 +183,12 @@
 	</slot>
 	<slot slot="content">
 		{#if edit_field.info.field === 'title'}
-			<Editor actions={actions} html={post['title']} on:change="{(e) => editHtml(e)}" />
+			<!-- <Editor actions={actions} html={post['title']} on:change="{(e) => editHtml(e)}" /> -->
+			<svelte:component this={cedit} actions={actions} html={post['title']} on:change="{(e) => editHtml(e)}" />
 		{/if}
 		{#if edit_field.info.field === 'text'}
-			<Editor actions={actions} html={post['text']} on:change="{(e) => editHtml(e)}" />
+			<!-- <Editor actions={actions} html={post['text']} on:change="{(e) => editHtml(e)}" /> -->
+			<svelte:component this={cedit} actions={actions} html={post['text']} on:change="{(e) => editHtml(e)}" />
 		{/if}
 		<!-- @ts-ignore -->
 		<!-- <Editor actions={actions} html={post[edit_field.info.field]} on:change="{(e) => editHtml(e)}" /> -->
