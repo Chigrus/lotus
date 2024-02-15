@@ -221,28 +221,32 @@
 }
 
 h1{
-    font-size: 24px;
+    font-size: 1.5em;
 }
 
 h2{
-  font-size: 20px;
+  font-size: 1.4em;
 }
 
 h3{
-  font-size: 18px;
+  font-size: 1.3em;
 }
 
 h4{
-  font-size: 16px;
+  font-size: 1.3em;
 }
 
 p{
-  font-size: 16px;
+  font-size: 1.3em;
   line-height: 1.7em;
 }
 
 ul :global(li){
-  font-size: 16px;
+  font-size: 1.3em;
+}
+
+ol :global(li){
+  font-size: 1.3em;
 }
 /*************************** Для разделителей ********************/
 .seporator{

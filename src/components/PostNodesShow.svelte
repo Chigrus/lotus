@@ -45,20 +45,20 @@ h3{
 }
 
 h4{
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 p{
-  font-size: 1.2em;
+  font-size: 1.3em;
   line-height: 1.7em;
 }
 
 ul :global(li){
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 ol :global(li){
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 .sep1{
